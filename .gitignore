@@ -1,13 +1,8 @@
-# 先忽略所有文件
+# 忽略所有文件
 *
-# 不忽略 .gitignore 文件本身
 !.gitignore
-# 追踪所有assets文件
+
+# 先放行Assets文件夹本身
+!Assets/
+# 放行Assets内部所有内容
 !Assets/**
-
-# !**/*.cs
-
-# === 可选补充：如果你需要保留目录结构、资源文件夹，按需放开 ===
-# !Assets/**
-# !Resources/**
-# !Scripts/**/*.cs

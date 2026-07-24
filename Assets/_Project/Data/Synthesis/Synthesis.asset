@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Synthesis
+  m_EditorClassIdentifier: Assembly-CSharp::SynthesisRecipe
+  SMetaList:
+  - {fileID: 11400000, guid: 8e3e16d121dfdb146aba51892edb4027, type: 2}
+  ConsumeTurns: 2
+  ProductCardType: 0
+  ProductCardTag: 0
