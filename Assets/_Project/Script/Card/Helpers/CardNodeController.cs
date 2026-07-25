@@ -7,6 +7,7 @@ using UnityEngine;
 //管理链表
 public class CardNodeController
 {
+    //111
 
     public CardComponent PreviousCard { get; set; }
     public CardComponent NextCard { get; set; }

@@ -1,5 +1,5 @@
 using System;
-using System.Diagnostics;
+using UnityEngine;
 
 /// <summary>
 /// 合成方法执行工厂
@@ -12,11 +12,12 @@ public class SynthesisExecuteFactory
         return synthesisAction;
     }
 
-    public SynthesisExecuteFactory CteateNewCard()
+    public SynthesisExecuteFactory CteateNewCard(CardTag cardTag,CardType cardType,Vector3 createPosition)
     {
         synthesisAction += () =>
         {
-            Debug.Print("CteateNewCard");
+            // Debug.Print("CteateNewCard");
+            GameRoot.Instance.cardFactory.CreateCard(cardType,cardTag,createPosition);
         };
         return this;
     }
@@ -25,7 +26,7 @@ public class SynthesisExecuteFactory
     {
         synthesisAction += () =>
         {
-            Debug.Print("ChangeRegionState");
+            Debug.Log("ChangeRegionState");
         };
         return this;
     }

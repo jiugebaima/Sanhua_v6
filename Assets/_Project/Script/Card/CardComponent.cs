@@ -19,16 +19,18 @@ public class CardComponent : MonoBehaviour, IDragable
     public StackController stackController { get; set; }
 
     public CardNodeController cardNodeController;
-
     //组件引用
     public SortingGroup sortingGroup;
 
     // UI 处理器
     [SerializeField]private CardUIHandler _uiHandler;
     private DropController _dropController;
+    private RegionController _regionController;
     public bool IsDragging => _uiHandler.IsDragging;
 
     [SerializeField] private LayerMask _cardLayerMask = 1 << 0;
+
+
 
     public float CardOffset => _cardOffset;
     public float MoveDuration => _moveDuration;
@@ -52,6 +54,7 @@ public class CardComponent : MonoBehaviour, IDragable
         }
         _dropController = new DropController(this, Camera.main, _cardLayerMask);
         cardNodeController = new CardNodeController(this);
+        _regionController = new RegionController(this);
     }
 
     #region  ---------- IDragable 接口 ----------
@@ -84,6 +87,7 @@ public class CardComponent : MonoBehaviour, IDragable
         
         cardNodeController.totheEndPosition(_uiHandler.TargetPosition);
 
+        _regionController.DetectRegion();
         // 启用Collider
         cardNodeController.EnableChainColliders();
     }

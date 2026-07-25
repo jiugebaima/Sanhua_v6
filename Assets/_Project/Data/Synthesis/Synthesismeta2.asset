@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Synthesis
-  m_EditorClassIdentifier: Assembly-CSharp::SynthesisRecipe
-  SMetaList:
-  - {fileID: 11400000, guid: 8e3e16d121dfdb146aba51892edb4027, type: 2}
-  ConsumeTurns: 2
-  ProductCardType: 0
-  ProductCardTag: 0
+  m_Script: {fileID: 11500000, guid: a33f282f30df00f438ac68bcdc2be695, type: 3}
+  m_Name: Synthesismeta2
+  m_EditorClassIdentifier: 
+  tag: 4
+  matchMode: 0
+  requir_value: 1
+  scale_num: 0
+  needDelete: 0

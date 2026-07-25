@@ -22,9 +22,9 @@ public class StackController
     public BaseCardData cardData;
     public SynthesisRecipeTable SRTable;
     public SynthesisRecipe targetRecipe;
-
     private int _turnCount;
     public Action synthesisExecuter;
+
 
     /// <summary>
     /// 构造方法,将当前 StackController 初始化为指定卡牌的根堆叠
@@ -46,26 +46,28 @@ public class StackController
     //对外接口,
     // 1获取配方，
     // 2如果获取则创建合成器
-    // 向Turnmanager注册 倒数countDown函数
-    // countdown函数到条件后触发合成器
+    // 3向Turnmanager注册 倒数countDown函数
+    // 4countdown函数到条件后触发合成器
     public void trySynthesis(SynthesisStatTable SST)
     {
         //重置状态
         resetExecutState();
-        Debug.Log("trySynthesis");
+        // Debug.Log("trySynthesis");
 
-
-        // if (getTargetRecipe(SST))
-        if (true)
+        if (getTargetRecipe(SST))
         {
-            //从工厂获取合成执行器(此处为测试)
-            synthesisExecuter += () =>
-            {
-              Debug.Log("合成");
-              resetExecutState();
-            };
+            //从工厂获取合成执行器
+            Action SE = new SynthesisExecuteFactory()
+                                    .CteateNewCard(targetRecipe.ProductCardTag,targetRecipe.ProductCardType,_selfCardComponent.transform.position)
+                                    .CreateExecutor();
+
+            //删除卡（待写）
+
+            synthesisExecuter += SE;
+            
+            //重置倒数回合
+            _turnCount = targetRecipe.ConsumeTurns;
             //向Turnmanager添加自己的合成执行器
-            _turnCount = 3;
             AttachToTurnManager();
         }
     }
