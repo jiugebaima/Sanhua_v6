@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RegionController
@@ -11,6 +12,7 @@ public class RegionController
     {
         _selfCardComponent = cardComponent;
         _currentRegion = region;
+        _detector = new RegionDetector();
     }
 
     /// <summary>
@@ -18,23 +20,35 @@ public class RegionController
     /// </summary>
     public void DetectRegion()
     {
-        RegionComponent detectedRegion = _detector.Detect();  // rr
+        Debug.Log("startDetect");
+        RegionComponent detectedRegion = _detector.Detect();
 
-        if (_currentRegion == null && detectedRegion != null)
+        if(detectedRegion != null)
         {
-            AssignRegion(detectedRegion);
+            Debug.Log(detectedRegion.regionName);
         }
-        else if (_currentRegion != null && detectedRegion == null)
+        
+        if(detectedRegion != null)
         {
-            ReturnFromRegion();
+            if(_currentRegion == detectedRegion)
+            {
+                return;//注意此处有return
+            }
+            else if(_currentRegion != null &&_currentRegion != detectedRegion)
+            {
+                SwitchRegion(detectedRegion);
+            }
+            else
+            {
+                AssignRegion(detectedRegion);
+            }
         }
-        else if (_currentRegion == detectedRegion)
+        else
         {
-            
-        }
-        else if (_currentRegion != null && detectedRegion != null && _currentRegion != detectedRegion)
-        {
-            SwitchRegion(detectedRegion);
+            if(_currentRegion != null)
+            {
+                ReturnFromRegion();
+            }
         }
     }
 
@@ -63,7 +77,7 @@ public class RegionController
     private void SwitchRegion(RegionComponent newRegion)
     {
         if (_debugMode) Debug.Log($"[RegionController] sr = rr (切换到 {newRegion.name})");
-        _currentRegion = newRegion;
+        _selfCardComponent.currentRegion = newRegion;
     }
 
     /// <summary>

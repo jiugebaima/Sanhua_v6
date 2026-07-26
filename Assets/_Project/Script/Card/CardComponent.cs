@@ -10,6 +10,7 @@ public class CardComponent : MonoBehaviour, IDragable
 {
     [Header("卡牌基础属性")]
     public BaseCardData baseCardData;
+    public RegionComponent currentRegion;
 
     [Header("堆叠配置")]
     [SerializeField] private float _cardOffset = -0.5f;
@@ -54,7 +55,7 @@ public class CardComponent : MonoBehaviour, IDragable
         }
         _dropController = new DropController(this, Camera.main, _cardLayerMask);
         cardNodeController = new CardNodeController(this);
-        _regionController = new RegionController(this);
+        _regionController = new RegionController(this,currentRegion);
     }
 
     #region  ---------- IDragable 接口 ----------
