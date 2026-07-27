@@ -11,28 +11,25 @@ public class CardComponent : MonoBehaviour, IDragable
     [Header("卡牌基础属性")]
     public BaseCardData baseCardData;
     public RegionComponent currentRegion;
+    public bool IsDragging => _uiHandler.IsDragging;
 
     [Header("堆叠配置")]
     [SerializeField] private float _cardOffset = -0.5f;
     [SerializeField] private float _moveDuration = 0.01f;
     [SerializeField] private float _zOffset = 0.01f;
-    // 堆叠引用
+
+    // 各路helper
     public StackController stackController { get; set; }
-
     public CardNodeController cardNodeController;
-    //组件引用
-    public SortingGroup sortingGroup;
-
-    // UI 处理器
-    [SerializeField]private CardUIHandler _uiHandler;
     private DropController _dropController;
     private RegionController _regionController;
-    public bool IsDragging => _uiHandler.IsDragging;
-
+    [SerializeField]private CardUIHandler _uiHandler;    // UI 处理器
+    
+    //组件引用
+    public SortingGroup sortingGroup;
     [SerializeField] private LayerMask _cardLayerMask = 1 << 0;
 
-
-
+    //外部暴露get
     public float CardOffset => _cardOffset;
     public float MoveDuration => _moveDuration;
     public float ZOffset => _zOffset;

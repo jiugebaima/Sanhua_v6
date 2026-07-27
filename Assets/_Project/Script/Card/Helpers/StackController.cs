@@ -18,12 +18,11 @@ public class StackController
 
 
     // 核心数据
-    private CardComponent _selfCardComponent ;
+    private CardComponent _selfCardComponent;
     public BaseCardData cardData;
     public SynthesisRecipeTable SRTable;
     public SynthesisRecipe targetRecipe;
-    private int _turnCount;
-    public Action synthesisExecuter;
+    SynthesisExecuter synthesisExecuter;
 
 
     /// <summary>
@@ -63,10 +62,11 @@ public class StackController
 
             //删除卡（待写）
 
-            synthesisExecuter += SE;
+            // synthesisExecuter += SE;
+            synthesisExecuter = new SynthesisExecuter(3,1,SE);
             
             //重置倒数回合
-            _turnCount = targetRecipe.ConsumeTurns;
+    
             //向Turnmanager添加自己的合成执行器
             AttachToTurnManager();
         }
@@ -92,22 +92,20 @@ public class StackController
     private void AttachToTurnManager()
     {
         Debug.Log("AttachToTurnManager");
-        GameRoot.Instance.TurnManager.OnTurnEnded+=CountDown;
+        GameRoot.Instance.TurnManager.OnTurnEnded+=EndTurn;
     }
 
     private void RemoveAttachToTurnManager()
     {
         Debug.Log("RemoveAttachToTurnManager");
-        GameRoot.Instance.TurnManager.OnTurnEnded-=CountDown;
+        GameRoot.Instance.TurnManager.OnTurnEnded-=EndTurn;
     }
 
-    private void CountDown()
+    private void EndTurn()
     {
-        _turnCount-=1;
-        if(_turnCount < 1)
+        if (synthesisExecuter.TurnEnd())
         {
-            _turnCount = 0;
-            synthesisExecuter?.Invoke();
+            RemoveAttachToTurnManager();
         }
     }
 

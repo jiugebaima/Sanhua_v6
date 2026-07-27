@@ -20,14 +20,7 @@ public class RegionController
     /// </summary>
     public void DetectRegion()
     {
-        Debug.Log("startDetect");
         RegionComponent detectedRegion = _detector.Detect();
-
-        if(detectedRegion != null)
-        {
-            Debug.Log(detectedRegion.regionName);
-        }
-        
         if(detectedRegion != null)
         {
             if(_currentRegion == detectedRegion)
@@ -59,7 +52,7 @@ public class RegionController
     /// </summary>
     private void AssignRegion(RegionComponent newRegion)
     {
-        _currentRegion = newRegion;
+        _selfCardComponent.currentRegion = newRegion;
         if (_debugMode) Debug.Log($"[RegionController] 进入区域: {newRegion.name}");
     }
 
@@ -69,7 +62,7 @@ public class RegionController
     private void ReturnFromRegion()
     {
         if (_debugMode) Debug.Log("[RegionController] 返回");
-        _currentRegion = null;
+        _selfCardComponent.currentRegion = null;
     }
     /// <summary>
     /// 切换到新区域
